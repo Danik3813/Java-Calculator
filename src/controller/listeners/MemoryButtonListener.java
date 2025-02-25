@@ -25,5 +25,6 @@ public class MemoryButtonListener implements ActionListener {
         calculationField.setText(
             memoryButtonHandler.memoryApply(calculationField.getText(), JSource.getPositionX(), configHandler)
         );
+        configHandler.saveConfig();
     }
 }
