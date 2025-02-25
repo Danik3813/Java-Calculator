@@ -7,6 +7,7 @@ import model.*;
 import javax.swing.JLabel;
 
 import view.utils.JMemoryButton;
+import controller.file_handlers.ConfigHandler;
 
 public class MemoryButtonListener implements ActionListener {
     JLabel calculationField;
@@ -19,6 +20,10 @@ public class MemoryButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent event){
         JMemoryButton JSource = (JMemoryButton) event.getSource();
         MemoryButtonHandler memoryButtonHandler = new MemoryButtonHandler();
-        
+        ConfigHandler configHandler = new ConfigHandler();
+        configHandler.readConfig();
+        calculationField.setText(
+            memoryButtonHandler.memoryApply(calculationField.getText(), JSource.getPositionX(), configHandler)
+        );
     }
 }

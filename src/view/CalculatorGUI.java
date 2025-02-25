@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -69,7 +67,7 @@ public class CalculatorGUI extends JFrame{
         JPanel memoryPanel = new JPanel(new GridLayout(1, 5, 2, 0));
         for (int i = 0; i < memoryButtons.length; ++i){
             JButton memoryButton = new JMemoryButton(memoryButtons[i], i);
-            if (i == 0 || i == 1) memoryButton.setEnabled(false);
+            // if (i == 0 || i == 1) memoryButton.setEnabled(false);
             memoryButton.addActionListener(new MemoryButtonListener(calculationField));
             memoryPanel.add(memoryButton);
         }

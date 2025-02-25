@@ -1,50 +1,53 @@
 package model;
 
+import controller.file_handlers.ConfigHandler;;
+
 public class MemoryButtonHandler{
     final private int COUNT_HANDLERS = 5;
     private ButtonHandler[] buttonHandlers;
 
     public MemoryButtonHandler(){
         buttonHandlers = new ButtonHandler[COUNT_HANDLERS];
-        buttonHandlers[0] =  new memoryResponse();
-        buttonHandlers[1] = new memoryClear();
-        buttonHandlers[2] = new memoryAdd();
-        buttonHandlers[3] = new memorySubtract();
-        buttonHandlers[4] = new memorySet();
+        buttonHandlers[0] = new MemoryClear();
+        buttonHandlers[1] =  new MemoryResponse();
+        buttonHandlers[2] = new MemoryAdd();
+        buttonHandlers[3] = new MemorySubtract();
+        buttonHandlers[4] = new MemorySet();
     }
 
-    public String memoryApply(String text, int positionX){
-        return buttonHandlers[positionX].apply(text);
+    public String memoryApply(String text, int positionX, ConfigHandler configHandler){
+        return buttonHandlers[positionX].apply(text, configHandler);
     }
 }
 
-class memoryResponse implements ButtonHandler{
-    public String apply(String text)
+class MemoryClear implements ButtonHandler{
+    public String apply(String text, ConfigHandler configHandler){
+        configHandler.setMemoryData(0);
+        return "0";
+    }
+}
+
+class MemoryResponse implements ButtonHandler{
+    public String apply(String text, ConfigHandler configHandler)
     {
-        return null;
+        return "" + configHandler.getMemoryData();
     }   
 }
 
-class memoryClear implements ButtonHandler{
-    public String apply(String text){
+class MemoryAdd implements ButtonHandler{
+    public String apply(String text, ConfigHandler configHandler){
         return null;
     }
 }
 
-class memoryAdd implements ButtonHandler{
-    public String apply(String text){
+class MemorySubtract implements ButtonHandler{
+    public String apply(String text, ConfigHandler configHandler){
         return null;
     }
 }
 
-class memorySubtract implements ButtonHandler{
-    public String apply(String text){
-        return null;
-    }
-}
-
-class memorySet implements ButtonHandler{
-    public String apply(String text){
+class MemorySet implements ButtonHandler{
+    public String apply(String text, ConfigHandler configHandler){
         return null;
     }
 }
