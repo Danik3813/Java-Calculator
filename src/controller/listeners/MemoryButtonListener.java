@@ -1,9 +1,9 @@
-package controller;
+package controller.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import model.*;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import view.utils.JMemoryButton;
@@ -17,8 +17,8 @@ public class MemoryButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event){
-        calculationField.setText("sex");
         JMemoryButton JSource = (JMemoryButton) event.getSource();
+        MemoryButtonHandler memoryButtonHandler = new MemoryButtonHandler();
         
     }
 }

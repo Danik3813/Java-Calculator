@@ -12,8 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.CalculationButtonListener;
-import controller.MemoryButtonListener;
+import controller.listeners.CalculationButtonListener;
+import controller.listeners.MemoryButtonListener;
 import view.utils.*;
 
 public class CalculatorGUI extends JFrame{
