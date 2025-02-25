@@ -1,7 +1,9 @@
 package controller.file_handlers;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class ConfigHandler {
@@ -37,6 +39,11 @@ public class ConfigHandler {
     }
 
     public void saveConfig(){
-        
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME))){
+            bufferedWriter.write("memory:" + ((memoryData != null) ? memoryData : 0));
+        }
+        catch(IOException exception){
+            System.err.println("Ошибка чтения файла: " + exception.getMessage());
+        }
     }
 }
