@@ -9,7 +9,7 @@ public class MemoryButtonHandler{
     public MemoryButtonHandler(){
         buttonHandlers = new ButtonHandler[COUNT_HANDLERS];
         buttonHandlers[0] = new MemoryClear();
-        buttonHandlers[1] =  new MemoryResponse();
+        buttonHandlers[1] = new MemoryResponse();
         buttonHandlers[2] = new MemoryAdd();
         buttonHandlers[3] = new MemorySubtract();
         buttonHandlers[4] = new MemorySet();
@@ -22,7 +22,7 @@ public class MemoryButtonHandler{
 
 class MemoryClear implements ButtonHandler{
     public String apply(String text, ConfigHandler configHandler){
-        configHandler.setMemoryData(0);
+        configHandler.setMemoryData(null);
         return "0";
     }
 }

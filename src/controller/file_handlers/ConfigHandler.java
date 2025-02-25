@@ -9,13 +9,13 @@ public class ConfigHandler {
     // TODO: исправить абсолютную ссылку на относительную!
 
     private final String FILE_NAME = "E:\\repository\\Java-Calculator\\src\\resources\\config.txt";
-    private double memoryData;
+    private Double memoryData;
 
     public double getMemoryData(){
         return memoryData;
     }
 
-    public void setMemoryData(double memoryData){
+    public void setMemoryData(Double memoryData){
         this.memoryData = memoryData;
     }
 
