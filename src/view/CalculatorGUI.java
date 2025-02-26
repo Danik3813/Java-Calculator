@@ -82,10 +82,10 @@ public class CalculatorGUI extends JFrame{
         regularGrid.fill = GridBagConstraints.BOTH;
 
         JPanel calculationPanel = new JPanel(new GridLayout(6, 4, 2, 2));
-        for (int i = 0; i < calculationButtons.length; ++i){
-            for (int j = 0; j < calculationButtons[i].length; ++j){
-                JButton calculationButton = new JCalculationButton(calculationButtons[i][j], i, j);
-                calculationButton.addActionListener(new CalculationButtonListener());
+        for (int i = 0; i < calculationButtons.length; i++){
+            for (int j = 0; j < calculationButtons[i].length; j++){
+                JCalculationButton calculationButton = new JCalculationButton(calculationButtons[i][j], i, j);
+                calculationButton.addActionListener(new CalculationButtonListener(calculationField));
                 calculationPanel.add(calculationButton);
             }
         }
