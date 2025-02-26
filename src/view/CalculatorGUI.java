@@ -35,7 +35,7 @@ public class CalculatorGUI extends JFrame{
     public void initializeGUI(int width, int height)
     {
         setSize(width, height);
-        setMinimumSize(new Dimension(300, 450));
+        setMinimumSize(new Dimension(450, 500));
         this.setLayout(new GridBagLayout());
 
         initializeCalculationField();
