@@ -1,41 +1,42 @@
 package controller.parsers;
 
+import controller.parsers.utils.ParserUtils;
+
 public class ParserCalculationField {
-    private double[] numbers;
     private final int COUNT_NUMBERS = 2;
+    private Double[] numbers;
     private char delimeter;
 
-    public ParserCalculationField(){
-        numbers = new double[COUNT_NUMBERS];
-        delimeter = ' ';
+    public ParserCalculationField() {
+        numbers = new Double[COUNT_NUMBERS];
     }
 
-    public double[] getNumbers(){
+    public Double[] getNumbers() {
         return numbers;
     }
 
-    public char getDelimeter(){
+    public char getDelimeter() {
         return delimeter;
     }
 
-    private boolean getOperator(char delimeter){
-        return delimeter == '+' || delimeter == '-' || delimeter == '/' || delimeter == '*'; 
-    }
-
-    // TODO: пофиксить невоможность спарсить числа в экспоненциальном виде типа 7.89E-4
-    public void parse(String calculationText){
-        for (int i = 0; i < calculationText.length(); ++i){
-            if (getOperator(calculationText.charAt(i)))
+    /* 
+        TODO: пофиксить невоможность спарсить числа в экспоненциальном виде типа 7.89E-4
+        TODO: пофиксить проблему при смене знака второго числа, если оператором служит "-"
+    */
+    public void parse(String calculationText) {
+        ParserUtils parserUtils = new ParserUtils();
+        for (int i = 0; i < calculationText.length(); ++i) {
+            if (calculationText.charAt(i) == '-' && i == 0) continue;
+            if (parserUtils.isOperator(calculationText.charAt(i))) {
                 delimeter = calculationText.charAt(i);
-        } 
-        String[] numbersLine = new String[COUNT_NUMBERS];
-        if (delimeter == ' '){
-            numbersLine[0] = "0";
-            numbersLine[1] = calculationText;
+                break;
+            }   
         }
-        else numbersLine = calculationText.split("" + delimeter); 
-        for (int i = 0; i < COUNT_NUMBERS; ++i){
-            numbers[i] = Double.parseDouble(numbersLine[i]);
+        if (delimeter == 0) numbers[0] = Double.parseDouble(calculationText);
+        else {
+            String[] numbersLine = calculationText.split("\\" + delimeter);
+            numbers[0] = Double.parseDouble(numbersLine[0]);
+            if (numbersLine.length > 1) numbers[1] = Double.parseDouble(numbersLine[1]);
         }
     }
 }

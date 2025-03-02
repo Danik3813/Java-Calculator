@@ -1,6 +1,6 @@
 package model;
 
-import controller.file_handlers.ConfigHandler;
+import controller.fileHandlers.ConfigHandler;
 
 public interface MemoryHandler {
     String apply(String calculationText, ConfigHandler configHandler);

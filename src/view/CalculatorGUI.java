@@ -5,16 +5,20 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+//import controller.file_handlers.ConfigHandler;
 import controller.listeners.CalculationButtonListener;
 import controller.listeners.MemoryButtonListener;
 import view.utils.*;
 
 public class CalculatorGUI extends JFrame{
+    final String ICON_PATH = "resources/calculatorIcon.png";
     // Текст панели элементов
     final String[] memoryButtons = {"MC", "MR", "M+", "M-", "MS"};
     final String[][] calculationButtons = {
@@ -23,7 +27,7 @@ public class CalculatorGUI extends JFrame{
         {"7", "8", "9", "*"}, 
         {"4", "5", "6", "-"}, 
         {"1", "2", "3", "+"}, 
-        {"+/-", "0", ",", "="}
+        {"+/-", "0", ".", "="}
     };
     JLabel calculationField;
 
@@ -42,8 +46,14 @@ public class CalculatorGUI extends JFrame{
         initializeMemoryPanel();
         initializeCalculationPanel();
 
+        initializeIcon();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    private void initializeIcon(){
+        ImageIcon calculatorIcon = new ImageIcon(ICON_PATH);
+        setIconImage(calculatorIcon.getImage());
     }
 
     private void initializeCalculationField(){
@@ -67,7 +77,10 @@ public class CalculatorGUI extends JFrame{
         JPanel memoryPanel = new JPanel(new GridLayout(1, 5, 2, 0));
         for (int i = 0; i < memoryButtons.length; ++i){
             JButton memoryButton = new JMemoryButton(memoryButtons[i], i);
-            // if (i == 0 || i == 1) memoryButton.setEnabled(false);
+            // ConfigHandler configHandler = new ConfigHandler();
+            // if (configHandler.getMemoryData() == 0.0){
+            //     if (i == 0 || i == 1) memoryButton.setEnabled(false);
+            // }
             memoryButton.addActionListener(new MemoryButtonListener(calculationField));
             memoryPanel.add(memoryButton);
         }

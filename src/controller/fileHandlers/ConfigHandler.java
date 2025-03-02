@@ -1,4 +1,4 @@
-package controller.file_handlers;
+package controller.fileHandlers;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,17 +7,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ConfigHandler {
-
-    // TODO: исправить абсолютную ссылку на относительную!
-
-    private final String FILE_NAME = "E:\\repository\\Java-Calculator\\src\\resources\\config.txt";
-    private Double memoryData;
+    private final String FILE_NAME = "resources/config.txt";
+    private double memoryData;
 
     public double getMemoryData(){
         return memoryData;
     }
 
-    public void setMemoryData(Double memoryData){
+    public void setMemoryData(double memoryData){
         this.memoryData = memoryData;
     }
 
@@ -25,9 +22,9 @@ public class ConfigHandler {
         // Пометка: конструкция try-with-resources для автоматического закрытия обработки файла.
         try (BufferedReader memoryReader = new BufferedReader(new FileReader(FILE_NAME))){
             String line = memoryReader.readLine();
-            if (line == null || line.length() < 7) System.err.println("Неверный формат данных!");
+            if (line == null || line.length() < 5) System.err.println("Неверный формат данных!");
             try{
-                memoryData = Double.parseDouble(line.substring(7));
+                memoryData = Double.parseDouble(line.substring(5));
             }
             catch (NumberFormatException numberFormatException){
                 System.err.println("Ошибка конвертации: " + numberFormatException.getMessage());
@@ -40,7 +37,7 @@ public class ConfigHandler {
 
     public void saveConfig(){
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME))){
-            bufferedWriter.write("memory:" + ((memoryData != null) ? memoryData : 0));
+            bufferedWriter.write("data:" + memoryData);
         }
         catch(IOException exception){
             System.err.println("Ошибка чтения файла: " + exception.getMessage());

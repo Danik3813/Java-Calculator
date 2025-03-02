@@ -1,6 +1,8 @@
 package model;
 
-import controller.file_handlers.ConfigHandler;;
+import controller.fileHandlers.ConfigHandler;
+import controller.parsers.ParserCalculationField;
+import model.utils.ModelUtils;;
 
 public class MemoryButtonHandler{
     final private int COUNT_HANDLERS = 5;
@@ -15,39 +17,68 @@ public class MemoryButtonHandler{
         memoryHandlers[4] = new MemorySet();
     }
 
-    public String memoryApply(String text, int positionX, ConfigHandler configHandler){
-        return memoryHandlers[positionX].apply(text, configHandler);
+    public String memoryApply(String calculationText, int positionX, ConfigHandler configHandler){
+        return memoryHandlers[positionX].apply(calculationText, configHandler);
     }
 }
 
 class MemoryClear implements MemoryHandler{
-    public String apply(String text, ConfigHandler configHandler){
-        configHandler.setMemoryData(null);
-        return "0";
+    public String apply(String calculationText, ConfigHandler configHandler){
+        configHandler.setMemoryData(0);
+        return calculationText;
     }
 }
 
 class MemoryResponse implements MemoryHandler{
-    public String apply(String text, ConfigHandler configHandler)
+    public String apply(String calculationText, ConfigHandler configHandler)
     {
-        return "" + configHandler.getMemoryData();
+        ModelUtils modelUtils = new ModelUtils();
+        double memoryData = configHandler.getMemoryData();
+        return (memoryData == 0.0) ? "0" : "" + modelUtils.getAccurateValue(memoryData);
     }   
 }
 
 class MemoryAdd implements MemoryHandler{
-    public String apply(String text, ConfigHandler configHandler){
-        return null;
+    private final char ARITHMETIC_SIGN = '+';
+
+    public String apply(String calculationText, ConfigHandler configHandler){
+        ParserCalculationField parserCalculationField = new ParserCalculationField();
+        parserCalculationField.parse(calculationText);
+        ModelUtils calculationUtils = new ModelUtils(
+            configHandler.getMemoryData(), 
+            (parserCalculationField.getNumbers()[1] == null) ? parserCalculationField.getNumbers()[0] : parserCalculationField.getNumbers()[1], 
+            ARITHMETIC_SIGN
+        );
+        configHandler.setMemoryData(Double.parseDouble(calculationUtils.equals()));
+        return calculationText;
     }
 }
 
 class MemorySubtract implements MemoryHandler{
-    public String apply(String text, ConfigHandler configHandler){
-        return null;
+    private final char ARITHMETIC_SIGN = '-';
+
+    public String apply(String calculationText, ConfigHandler configHandler){
+        ParserCalculationField parserCalculationField = new ParserCalculationField();
+        parserCalculationField.parse(calculationText);
+        ModelUtils calculationUtils = new ModelUtils(
+            configHandler.getMemoryData(), 
+            (parserCalculationField.getNumbers()[1] == null) ? parserCalculationField.getNumbers()[0] : parserCalculationField.getNumbers()[1], 
+            ARITHMETIC_SIGN
+        );
+        configHandler.setMemoryData(Double.parseDouble(calculationUtils.equals()));
+        return calculationText;
     }
 }
 
 class MemorySet implements MemoryHandler{
-    public String apply(String text, ConfigHandler configHandler){
-        return null;
+    public String apply(String calculationText, ConfigHandler configHandler){
+        ParserCalculationField parserCalculationField = new ParserCalculationField();
+        parserCalculationField.parse(calculationText);
+        configHandler.setMemoryData(
+            (parserCalculationField.getNumbers()[1] == null) 
+            ? parserCalculationField.getNumbers()[0] 
+            : parserCalculationField.getNumbers()[1]
+        );
+        return calculationText;
     }
 }

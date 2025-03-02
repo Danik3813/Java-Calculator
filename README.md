@@ -1,18 +1,46 @@
-## Getting Started
+# SwingUI-Calculator
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Описание
+Данный репозиторий - графический калькулятор, написанный на языке программирования Java с использованием фреймворка SwingUI в рамках практической работы по дисциплине "Объектно-ориентированное программирование" и курса на Java-разработчика от Цифровой Кафедры НИЯУ МИФИ.
 
-## Folder Structure
+## Структура проекта
+Проект построен на основе паттерна проектирования MVC (Model - Viev - Controller).
+Исходный код содержится в src, ресурсы - в resources.
 
-The workspace contains two folders by default, where:
+### Пакет controller
+Отвечает за связь графического интерфейса калькулятора и методов обработки данных.
+- _filehandlers_: класс _ConfigHandlers_ отвечает за работу с конфигурационным файлом, который хранит в себе постоянную память калькулятора;
+- _listeners_: пакет с классами слушателей событий нажатия на кнопки работы с памятью или вычислениями;
+- _parsers_: пакет с классом парсинга строки с графического интерфейса, а также с утилитарным классом _ParserUtils_.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+### Пакет model
+Отвечает за вычисления и работу с постоянной памятью калькулятора.
+- _utils_: утилитарный класс, выполняющий непосредственные вычисления или работу с данными;
+- _остальные классы_: классы, передающие вычислтельные данные контроллеру.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+### Пакет view
+Реализация динамического графического интерфейса.
+- _utils_: наследники _JButton_ с указанием уникального индекса для осуществления связи данных с графическим отображением;
+- _CalculatorGUI_: графический интерфейс калькулятора. 
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Запуск проекта
+Используте данную команду в терминале по пути к JAR-файлу.
+```bash
+java -jar calculator.jar
+```
 
-## Dependency Management
+## Баги и недочёты
+Выявлены следующие баги и недоработки проекта:
+- невозможно обработать вычитание отрицательного числа (например, 23--4 не будет обработано);
+- экспоненциальные числа формата 7.8E-9 не могут быть обработаны;
+- вычисления с вещественными числами могут выдавать проблемы с точностью (например, 23.1 + 5.6 = 28.700000000000003);
+- нет возможности работать непосредственно с клавиатуры.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Версия
+Текущая версия: 1.0-alpha
+
+## Автор
+Студент группы ИФСТ-21, Купцов Даниил Олегович.
+
+
+
