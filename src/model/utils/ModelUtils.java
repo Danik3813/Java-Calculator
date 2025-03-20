@@ -55,8 +55,8 @@ public class ModelUtils {
 
     public String calculationSquare(){
         return (num2 == null)
-        ? "" + getAccurateValue(num1*num1) 
-        : "" + getAccurateValue(num1) + delimeter + getAccurateValue(num2*num2);
+            ? "" + getAccurateValue(num1*num1) 
+            : "" + getAccurateValue(num1) + delimeter + getAccurateValue(num2*num2);
     }
 
     public String calculationDivideOneByNumber(){
@@ -124,7 +124,7 @@ public class ModelUtils {
             case '*':
                 return getAccurateValue(num1 * num2);
             case '/':
-                return getAccurateValue(num1 / num2);
+                return (num2 == 0) ? ERROR_MESSAGE : getAccurateValue(num1 / num2);
             default:
                 return getAccurateValue(num1);
         }

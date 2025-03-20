@@ -18,9 +18,9 @@ import controller.listeners.MemoryButtonListener;
 import view.utils.*;
 
 public class CalculatorGUI extends JFrame{
-    final String ICON_PATH = "resources/calculatorIcon.png";
+    private static final String ICON_PATH = "resources/calculatorIcon.png";
     // Текст панели элементов
-    final String[] memoryButtons = {"MC", "MR", "M+", "M-", "MS"};
+    private static final String[] memoryButtons = {"MC", "MR", "M+", "M-", "MS"};
     final String[][] calculationButtons = {
         {"%", "CE", "C", "⌫"}, 
         {"1/x", "x^2", "√", "/"}, 
@@ -29,7 +29,7 @@ public class CalculatorGUI extends JFrame{
         {"1", "2", "3", "+"}, 
         {"+/-", "0", ".", "="}
     };
-    JLabel calculationField;
+    private JLabel calculationField;
 
     public CalculatorGUI(String title)
     {
@@ -77,10 +77,6 @@ public class CalculatorGUI extends JFrame{
         JPanel memoryPanel = new JPanel(new GridLayout(1, 5, 2, 0));
         for (int i = 0; i < memoryButtons.length; ++i){
             JButton memoryButton = new JMemoryButton(memoryButtons[i], i);
-            // ConfigHandler configHandler = new ConfigHandler();
-            // if (configHandler.getMemoryData() == 0.0){
-            //     if (i == 0 || i == 1) memoryButton.setEnabled(false);
-            // }
             memoryButton.addActionListener(new MemoryButtonListener(calculationField));
             memoryPanel.add(memoryButton);
         }
